@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const BaseMain = styled.div`
   margin: 1rem;
   flex-grow: 1;
+  overflow-y: auto;
 `;
 
 export const CardContainer = styled.div`
@@ -27,6 +28,13 @@ export const CardTitle = styled.p`
   margin: 0;
   padding: 0.5rem 1rem;
   margin-bottom: 0.8rem;
+`;
+
+export const LoadingMessage = styled.p`
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: "white";
 `;
 
 export const EpisodeInfoContainer = styled.div`

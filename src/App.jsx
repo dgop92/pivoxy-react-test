@@ -19,7 +19,7 @@ const PageBase = styled.div`
 const AppContentWrapper = styled.div`
   max-width: 1400px;
   width: 100vw;
-  /* height: 100vh; */
+  height: 100vh;
   flex-direction: column;
   display: flex;
 `;
@@ -27,6 +27,7 @@ const AppContentWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex: 1;
+  overflow-y: hidden;
   @media ${devices.down.desktop} {
     flex-direction: column;
   }
