@@ -5,6 +5,7 @@ import { mainTheme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { Main } from "./components/Main";
+import { devices } from "./utils/breakpoints";
 
 const PageBase = styled.div`
   background-color: ${(props) => props.theme.palette.background.main};
@@ -18,7 +19,7 @@ const PageBase = styled.div`
 const AppContentWrapper = styled.div`
   max-width: 1400px;
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   flex-direction: column;
   display: flex;
 `;
@@ -26,6 +27,9 @@ const AppContentWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex: 1;
+  @media ${devices.down.desktop} {
+    flex-direction: column;
+  }
 `;
 
 export default function App() {

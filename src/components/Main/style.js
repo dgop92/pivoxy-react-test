@@ -29,7 +29,7 @@ export const CardTitle = styled.p`
   margin-bottom: 0.8rem;
 `;
 
-export const EpisodeInfoContainer = styled.p`
+export const EpisodeInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;

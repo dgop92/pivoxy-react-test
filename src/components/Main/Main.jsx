@@ -28,6 +28,12 @@ export default function Main() {
         <InfoCard />
         <InfoCard />
         <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
       </CardContainer>
     </BaseMain>
   );
