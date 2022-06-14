@@ -1,10 +1,10 @@
 import React from "react";
-import { BaseSidebar } from "./style";
+import { BaseSidebar, SidebarContent } from "./style";
 
 export default function Sidebar() {
   return (
     <BaseSidebar>
-      <p>hola</p>
+      <SidebarContent>Sidebar</SidebarContent>
     </BaseSidebar>
   );
 }
