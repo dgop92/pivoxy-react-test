@@ -1,6 +1,6 @@
 import "normalize.css";
 import styled, { ThemeProvider } from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { mainTheme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
@@ -34,14 +34,20 @@ const ContentWrapper = styled.div`
 `;
 
 export default function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const onSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <ThemeProvider theme={mainTheme}>
       <PageBase>
         <AppContentWrapper>
           <Header />
           <ContentWrapper>
-            <Sidebar />
-            <Main />
+            <Sidebar onSearch={onSearch} />
+            <Main searchTerm={searchTerm} />
           </ContentWrapper>
         </AppContentWrapper>
       </PageBase>

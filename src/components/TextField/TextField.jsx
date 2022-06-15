@@ -9,7 +9,6 @@ const InputContainer = styled.div`
 
   @media ${devices.down.desktop} {
     width: 95%;
-    margin-bottom: 0.5rem;
   }
 `;
 

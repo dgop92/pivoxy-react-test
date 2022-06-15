@@ -1,29 +1,8 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getEpisodes } from "rickmortyapi";
-import {
-  BaseMain,
-  Card,
-  CardTitle,
-  EpisodeInfo,
-  EpisodeInfoContainer,
-  LoadingMessage,
-} from "./style";
-
-function InfoCard({ name, airDate, episodeSeason }) {
-  const season = episodeSeason.slice(1, 3);
-  const episode = episodeSeason.slice(5);
-  return (
-    <Card>
-      <CardTitle>{name}</CardTitle>
-      <EpisodeInfoContainer>
-        <EpisodeInfo>{airDate}</EpisodeInfo>
-        <EpisodeInfo>{season}</EpisodeInfo>
-        <EpisodeInfo>{episode}</EpisodeInfo>
-      </EpisodeInfoContainer>
-    </Card>
-  );
-}
+import { EpisodeCard } from "../EpisodeCard";
+import { BaseMain, LoadingMessage } from "./style";
 
 const infinityStyles = {
   gap: "1rem",
@@ -31,44 +10,68 @@ const infinityStyles = {
   display: "grid",
 };
 
-export default function Main() {
+export default function Main({ searchTerm }) {
   const [state, setState] = useState({
     currentPage: 1,
     episodes: [],
     hasMore: true,
+    searchFlag: true,
   });
 
-  const fetchMoreData = async () => {
-    const responseData = await getEpisodes({ page: state.currentPage });
-    const episodes = responseData.data.results;
-    const nextUrl = responseData.data.info.next;
+  const fetchMoreData = async (resetPageCount = false) => {
+    const responseData = await getEpisodes({
+      page: resetPageCount ? 1 : state.currentPage,
+      name: searchTerm,
+    });
 
-    setState((oldState) => ({
-      currentPage: oldState.currentPage + 1,
-      episodes: [...oldState.episodes, ...episodes],
-      hasMore: nextUrl !== null,
-    }));
+    let episodes;
+    let nextUrl;
+
+    if (responseData.status === 404) {
+      episodes = [];
+      nextUrl = null;
+    } else {
+      episodes = responseData.data.results;
+      nextUrl = responseData.data.info.next;
+    }
+
+    if (resetPageCount) {
+      setState({
+        currentPage: 2,
+        episodes: episodes,
+        hasMore: nextUrl !== null,
+      });
+    } else {
+      setState((oldState) => ({
+        currentPage: oldState.currentPage + 1,
+        episodes: [...oldState.episodes, ...episodes],
+        hasMore: nextUrl !== null,
+      }));
+    }
   };
 
   useEffect(() => {
-    fetchMoreData();
+    // first time rendering the component
+    if (searchTerm === "" && state.currentPage === 1) {
+      fetchMoreData();
+    } else {
+      fetchMoreData(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(state.hasMore);
+  }, [searchTerm]);
 
   return (
-    <BaseMain id="mainBase">
+    <BaseMain id="baseMain">
       <InfiniteScroll
         dataLength={state.episodes.length}
         next={fetchMoreData}
         hasMore={state.hasMore}
         loader={<LoadingMessage>Loading...</LoadingMessage>}
         style={infinityStyles}
-        scrollableTarget="mainBase"
+        scrollableTarget="baseMain"
       >
         {state.episodes.map((data) => (
-          <InfoCard
+          <EpisodeCard
             key={data.id}
             name={data.name}
             airDate={data.air_date}
