@@ -5,7 +5,7 @@ import { devices } from "../../utils/breakpoints";
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 90%;
 
   @media ${devices.down.desktop} {
     width: 95%;

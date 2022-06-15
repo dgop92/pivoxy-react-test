@@ -12,7 +12,7 @@ const Button = styled.button`
   outline: none;
   border-radius: 0.4rem;
 
-  width: 85%;
+  width: 90%;
 
   background: ${(props) => props.theme.palette.primary.main};
   cursor: pointer;

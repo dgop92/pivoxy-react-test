@@ -4,6 +4,7 @@ export const BaseMain = styled.div`
   margin: 1rem;
   flex-grow: 1;
   overflow-y: auto;
+  padding: 0 0.6rem;
 `;
 
 export const LoadingMessage = styled.p`

@@ -1,7 +1,7 @@
 export const mainTheme = {
   palette: {
     common: { black: "#000", white: "#fff" },
-    background: { paper: "#fff", default: "#F9F9FB", main: "#0C203F" },
+    background: { paper: "#F8FAFB", default: "#F9F9FB", main: "#0C203F" },
     contrast: "#fff",
     divider: "#BDBDBD",
     dividerLight: "#EAEAEA",
